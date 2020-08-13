@@ -13,11 +13,19 @@
 #' @import purrr
 #'
 #' @export
+
+
 sing_day <- function(dataset, line, phrase_col){
 
   phrases <- dataset %>% pull({{phrase_col}})
+  myDay <- dataset$Day.in.Words[line]
 
-  #????
+  usePhrases <- as.vector( phrases )
 
-
+  finalPhrase <- glue::glue( "On the {myDay} day of Christmas my true love gave to me: ",
+                             glue_collapse(usePhrases[line:1],
+                                           ", ", last = "and ") )
+  return(finalPhrase)
 }
+
+
